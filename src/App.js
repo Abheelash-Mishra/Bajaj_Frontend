@@ -32,7 +32,7 @@ const App = () => {
 			setResponse(res.data);
 			console.log(res.data);
 		} catch (err) {
-			setError('Invalid JSON format or error in API call');
+			setError('Invalid JSON format!');
 		}
 	};
 
@@ -59,17 +59,22 @@ const App = () => {
 
 				<button
 					type="button"
-					className="text-white mt-4 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+					className="text-white w-full mt-4 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
 					onClick={handleSubmit}
 				>
 					Submit
 				</button>
 			</div>
 
-			{error && <div className="error">{error}</div>}
+			{error &&
+				<div className="w-1/2 text-xl">
+					<span className={"text-red-600 font-bold"}>ERROR: </span>{error}
+				</div>
+			}
 
 			{response && (
-				<>
+				<div className={"w-1/2 mt-10"}>
+					<h3 className={"text-3xl font-bold mb-4"}>Filtered Responses</h3>
 					<Select
 						isMulti
 						options={ options }
@@ -78,22 +83,22 @@ const App = () => {
 
 					<div className="response">
 						{ selectedOptions.includes('alphabets') && (
-							<div>
+							<h2 className={"text-lg my-2"}>
 								<strong>Alphabets:</strong> { JSON.stringify(response.alphabets) }
-							</div>
+							</h2>
 						) }
 						{ selectedOptions.includes('numbers') && (
-							<div>
+							<h2 className={ "text-lg my-2" }>
 								<strong>Numbers:</strong> { JSON.stringify(response.numbers) }
-							</div>
+							</h2>
 						) }
 						{ selectedOptions.includes('highest_alphabet') && (
-							<div>
+							<h2 className={ "text-lg my-2" }>
 								<strong>Highest Alphabet:</strong> { JSON.stringify(response.highest_alphabet) }
-							</div>
+							</h2>
 						) }
 					</div>
-				</>
+				</div>
 			) }
 		</div>
 
